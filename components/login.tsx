@@ -1,6 +1,6 @@
 import React from 'react';
 import stylesLogin from '../styles/login_css';
-import { View, TextInput, Image, Text, Modal, TouchableHighlightBase} from 'react-native';
+import { View, TextInput, Image, Text, Modal} from 'react-native';
 import * as Font from 'expo-font';
 import {Button, Card} from 'react-native-elements';
 import Parse, { User } from "parse/react-native";
@@ -42,6 +42,9 @@ class Login extends React.Component<Props> {
             'Raleway-Medium':{
                 uri: require('../assets/fonts/Raleway-Medium.ttf')
             },
+            'Raleway-Regular':{
+                uri: require('../assets/fonts/Raleway-Regular.ttf')
+            },
             'Roboto-Regular':{
                 uri: require('../assets/fonts/Roboto-Regular.ttf')
             }
@@ -57,7 +60,8 @@ class Login extends React.Component<Props> {
         
         await Parse.User.logIn(this.state.user, this.state.password)
         .then( ()=>{
-            this.props.navigation.navigate('Home', {toast: true});
+            this.props.navigation.navigate('Main');
+            this.setState({user: '', password: ''});
         }).catch( (err)=>{
             let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
             this.setState({showToast: 'block'});
@@ -66,8 +70,8 @@ class Login extends React.Component<Props> {
                 text1: 'Login failed',
                 text2: errorMessage,
                 visibilityTime: 3000,
-                position: 'bottom',
-                bottomOffset: 80
+                position: 'top',
+                topOffset: 75
             }
             );
 
@@ -79,29 +83,56 @@ class Login extends React.Component<Props> {
         this.setState({showModal: true});
     }
 
-    // fieldChange(value:string, field:string){
-
-    // }
-
     async createAccount(){
         this.setState({isButtonLoading2: true});
 
-        let user = new Parse.User();
-        user.set('username', this.state.registerUser);
-        user.set('password', this.state.registerPassword);
-
-        user.signUp()
-        .then((user)=>{
-            this.setState({
-                showModal: false,
-                isButtonLoading2: false,
-                registerUser: '',
-                registerPassword: '',
-                registerRePassword: ''
+        if(this.state.registerPassword === this.state.registerRePassword){
+            let user = new Parse.User();
+            user.set('username', this.state.registerUser);
+            user.set('password', this.state.registerPassword);
+    
+            user.signUp()
+            .then((user)=>{
+                this.setState({
+                    showModal: false,
+                    isButtonLoading2: false,
+                    registerUser: '',
+                    registerPassword: '',
+                    registerRePassword: ''
+                });
+                Toast.show({
+                    type: 'success',
+                    text1: 'Account created',
+                    visibilityTime: 3000,
+                    position: 'top',
+                    topOffset: 75
+        
+                })
+            }).catch((err)=>{
+                let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
+                this.setState({showToast: 'block'});
+                Toast.show({
+                    type: 'error',
+                    text1: 'Account creation failed',
+                    text2: errorMessage,
+                    visibilityTime: 3000,
+                    position: 'top',
+                    topOffset: 75
+                });
+                this.setState({isButtonLoading2: false});
+    
+            })
+        }else{
+            Toast.show({
+                type: 'error',
+                text1: 'Account creation failed',
+                text2: 'Both passwords must match',
+                visibilityTime: 3000,
+                position: 'top',
+                topOffset: 75
             });
-        }).catch((err)=>{
-            console.log(err);
-        })
+            this.setState({isButtonLoading2: false});
+        }
     }
     
     render(){
@@ -113,19 +144,19 @@ class Login extends React.Component<Props> {
                     <TextInput style={stylesLogin.textinputUser} placeholder=" User" autoCapitalize="none" value={this.state.user} onChangeText={(value)=> this.setState({user: value})}></TextInput>
                     <TextInput style={stylesLogin.textinputPassword} placeholder=" Password" secureTextEntry={true} autoCapitalize="none" value={this.state.password} onChangeText={(value) => this.setState({password: value})}></TextInput>
                     <View style={stylesLogin.buttonLogin}>
-                        <Button title="Log in" type="solid" buttonStyle={{borderRadius: 4}} raised={true} loading={this.state.isButtonLoading} onPress={() => this.loginButtonClicked()}></Button>
+                        <Button title="Log in" type="solid" buttonStyle={{borderRadius: 4, backgroundColor: '#022933'}} raised={true} loading={this.state.isButtonLoading} onPress={() => this.loginButtonClicked()}></Button>
                     </View>
                     <Toast ref={(ref) => Toast.setRef(ref)} />
                     <Text style={stylesLogin.textRegister}>Don't have an account?
                         <Text style={stylesLogin.textRegisterLink} onPress={()=> {this.registerButtonClicked()}}> Sign up.</Text>
                     </Text>
-                    <Modal visible={this.state.showModal} transparent={true} style={stylesLogin.modalRegister} animationType={'slide'}>
+                    <Modal visible={this.state.showModal} transparent={true} style={stylesLogin.modalRegister} animationType={'slide'} onRequestClose={()=> this.setState({showModal: false, registerUser: '', registerPassword: '', registerRePassword: ''}) }>
                         <Card containerStyle={stylesLogin.cardRegister}>
-                            <TextInput style={stylesLogin.textinputRegisterUser} placeholder=" Username/Email" value={this.state.registerUser} onChangeText={(value) => this.setState({registerUser: value})}></TextInput>
-                            <TextInput style={stylesLogin.textinputRegisterPassword} placeholder=" Password" value={this.state.registerPassword} onChangeText={(value) => this.setState({registerPassword: value})}></TextInput>
-                            <TextInput style={stylesLogin.textinputRegisterPassword2} placeholder=" Re-enter password" value={this.state.registerRePassword} onChangeText={(value) => this.setState({registerRePassword: value})}></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterUser} placeholder=" Username/Email" autoCapitalize="none" value={this.state.registerUser} onChangeText={(value) => {this.setState({registerUser: value}); } }></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterPassword} placeholder=" Password" secureTextEntry={true} autoCapitalize="none" value={this.state.registerPassword} onChangeText={(value) => this.setState({registerPassword: value})}></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterPassword2} placeholder=" Re-enter password" secureTextEntry={true} autoCapitalize="none" value={this.state.registerRePassword} onChangeText={(value) => this.setState({registerRePassword: value})}></TextInput>
                             <View style={stylesLogin.buttonSignUp} >
-                                <Button type="solid" title="Create account" buttonStyle={{borderRadius: 4}} raised={true} loading={this.state.isButtonLoading2} onPress={()=> this.createAccount()}></Button>
+                                <Button type="solid" title="Create account" buttonStyle={{borderRadius: 4, backgroundColor: '#022933'}} raised={true} loading={this.state.isButtonLoading2} onPress={()=> this.createAccount()}></Button>
                             </View>
                         </Card>
                     </Modal>

@@ -3,12 +3,13 @@ import { StyleSheet} from 'react-native';
 
 const stylesLogin = StyleSheet.create({
     login:{
-        backgroundColor: '#222222',
+        backgroundColor: '#01151A',
         width: '100%',
         height: '100%'
     },
     textinputUser:{
-        borderColor: 'grey',
+        borderColor: '#055266',
+        color: 'grey',
         borderWidth: 1.25,
         width: '70%',
         height: '5%',
@@ -18,7 +19,8 @@ const stylesLogin = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
     },
     textinputPassword:{
-        borderColor: 'grey',
+        borderColor: '#055266',
+        color: 'grey',
         borderWidth: 1.25,
         marginTop: '6%',
         width: '70%',
@@ -65,10 +67,12 @@ const stylesLogin = StyleSheet.create({
         opacity: 0.95,
         marginTop: '70%',
         alignSelf: 'center',
-        fontFamily: 'Roboto-Regular'
+        fontFamily: 'Roboto-Regular',
+        backgroundColor: '#01151A'
     },
     textinputRegisterUser:{
-        borderColor: '#1E89DA',
+        borderColor: '#055266',
+        color: 'grey',
         borderWidth: 1.25,
         width: '90%',
         height: '10%',
@@ -80,7 +84,8 @@ const stylesLogin = StyleSheet.create({
         marginBottom:'10%'
     },
     textinputRegisterPassword:{
-        borderColor: '#1E89DA',
+        borderColor: '#055266',
+        color: 'grey',
         borderWidth: 1.25,
         width: '90%',
         height: '10%',
@@ -91,7 +96,8 @@ const stylesLogin = StyleSheet.create({
         marginBottom: '10%'
     },
     textinputRegisterPassword2:{
-        borderColor: '#1E89DA',
+        borderColor: '#055266',
+        color: 'grey',
         borderWidth: 1.25,
         width: '90%',
         height: '10%',

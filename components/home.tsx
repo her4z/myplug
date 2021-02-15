@@ -1,53 +1,75 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, SafeAreaView} from 'react-native';
 import stylesHome from '../styles/home_css';
 import { Icon } from 'react-native-elements';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 import Toast from 'react-native-toast-message';
+import Parse, { User } from "parse/react-native";
+import { CommonActions } from '@react-navigation/native';
+import stylesMain from '../styles/main_css';
+
 
 interface Props{
-    route: any
+    route: any,
+    navigation: any
 }
 
 class Home extends React.Component <Props> {
 
     state={
-        searchText: ''
     };
 
-    componentDidMount(){
-        this.props?.route?.params?.toast === true?
+    async componentDidMount(){
+        let username = await Parse.User.current()?.getUsername();
+
         Toast.show({
             type: 'success',
             text1: 'Login successfull',
-            text2: 'Welcome back!',
+            text2: `Welcome back ${username}!`,
             visibilityTime: 3000,
-            topOffset: 100
-            
-        }):''
+            position: 'top',
+            topOffset: 75
+
+        })
     }
 
-    search(text:string){
-        this.setState({searchText: text});
-    };
 
+    openDrawer(){
+        this.props.navigation.openDrawer();
+    }
+    
     render(){
         return(
-            <View style={stylesHome.home}>
-                <Icon
-                    style={stylesHome.icon}
-                    name='user'
-                    type='font-awesome'
-                    size={40}
-                />
-                <SearchBar
-                    style={stylesHome.searchBar}
-                    placeholder="Buscar ofertas..."
-                    onChangeText={(text)=> {this.search(text)}}
-                    value={this.state.searchText}
-                />
-                <Toast ref={(ref) => Toast.setRef(ref)} />
-            </View>
+            <SafeAreaView>
+                <View style={stylesHome.home}>
+                    <View style={stylesHome.navBar}>
+                        <Button
+                            type="clear"
+                            buttonStyle={stylesHome.buttonDrawer}
+                            style={stylesHome.buttonDrawer}
+                            icon={
+                                <Icon type="ant-design" name="bars" onPress={()=> this.openDrawer()} size={36}/>
+                            }
+                        />
+                        
+                        
+                    </View>
+                    <View style={stylesHome.buttonBuy}>
+                        <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}>
+                            <Icon name="user" type="font-awesome" size={36} style={{position: 'absolute', bottom: 30}}>
+
+                            </Icon>\
+                        </Button>
+                    </View>
+                    <View style={stylesHome.midLine}>
+                        
+                    </View>
+                    <View style={stylesHome.buttonSell}>
+                        <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}></Button>
+                    </View>
+                    <Toast ref={(ref) => Toast.setRef(ref)} />
+                </View>
+            </SafeAreaView>
         )
     }
 }
