@@ -7,15 +7,13 @@ interface Props{
 }
 
 class AccountSettings extends React.Component <Props>{
-    constructor(Props: any){
-        super(Props);
-        this.state= {
-            session:{
-                user: {username: null}
-            }
-        };
-    }
 
+    state= {
+        session:{
+            user: {username: null}
+        }
+    };
+    
     componentDidMount(){
         let currentUser = Parse.User.current();
         this.setState({

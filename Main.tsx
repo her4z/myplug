@@ -2,6 +2,9 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from './components/home';
 import AccountSettings from './components/accountSettings';
+import StyledDrawer from './components/drawer';
+import Parse, { User } from "parse/react-native";
+
 
 
 const Drawer = createDrawerNavigator();
@@ -9,10 +12,10 @@ const Drawer = createDrawerNavigator();
 export default function Main(){
 
     return(
-        <Drawer.Navigator initialRouteName='Home' drawerStyle={{backgroundColor: '#022933'}} >
+        <Drawer.Navigator initialRouteName='Home' drawerStyle={{backgroundColor: '#022933'}} drawerContent={(props)=> <StyledDrawer {...props}></StyledDrawer>}>
             <Drawer.Screen
-                name="Home"
-                component={Home}
+            name="Home"
+            component={Home}
             />
             <Drawer.Screen
                 name="Account Settings"

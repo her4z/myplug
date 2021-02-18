@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Expo files.
+.expo/
+.expo-shared/

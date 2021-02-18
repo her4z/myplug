@@ -15,7 +15,7 @@ const stylesLogin = StyleSheet.create({
         height: '5%',
         alignSelf: 'center',
         borderRadius: 2,
-        marginTop: '15%',
+        marginTop: '20%',
         fontFamily: 'Roboto-Regular',
     },
     textinputPassword:{
@@ -28,18 +28,18 @@ const stylesLogin = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 2,
         fontFamily: 'Roboto-Regular',
-        marginBottom: '10%',
+        marginBottom: '12%',
     },
     logo:{
         resizeMode: 'contain',
         aspectRatio: 1.75,
         alignSelf: 'center',
-        marginTop: '40%'
+        marginTop: '30%'
     },
     brand:{
         textAlign: 'center',
         alignSelf: 'center',
-        marginTop:'5%',
+        marginTop:'10%',
         fontSize: 30,
         fontFamily: 'Raleway-Light'
     },

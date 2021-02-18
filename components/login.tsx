@@ -139,7 +139,7 @@ class Login extends React.Component<Props> {
         if(this.state.fontsLoaded){
             return(
                 <View style={stylesLogin.login}>
-                    <Image source={require('../assets/logo1.png')} style={stylesLogin.logo}></Image>
+                    <Image source={require('../assets/logo3.png')} style={stylesLogin.logo}></Image>
                     <Text style={stylesLogin.brand}>My Plug</Text>
                     <TextInput style={stylesLogin.textinputUser} placeholder=" User" autoCapitalize="none" value={this.state.user} onChangeText={(value)=> this.setState({user: value})}></TextInput>
                     <TextInput style={stylesLogin.textinputPassword} placeholder=" Password" secureTextEntry={true} autoCapitalize="none" value={this.state.password} onChangeText={(value) => this.setState({password: value})}></TextInput>

@@ -21,7 +21,6 @@ class Home extends React.Component <Props> {
 
     async componentDidMount(){
         let username = await Parse.User.current()?.getUsername();
-
         Toast.show({
             type: 'success',
             text1: 'Login successfull',
@@ -29,8 +28,8 @@ class Home extends React.Component <Props> {
             visibilityTime: 3000,
             position: 'top',
             topOffset: 75
-
-        })
+            
+        });
     }
 
 
@@ -47,12 +46,11 @@ class Home extends React.Component <Props> {
                             type="clear"
                             buttonStyle={stylesHome.buttonDrawer}
                             style={stylesHome.buttonDrawer}
+                            onPress={()=> this.openDrawer()}
                             icon={
-                                <Icon type="ant-design" name="bars" onPress={()=> this.openDrawer()} size={36}/>
+                                <Icon type="ant-design" name="bars" size={36}/>
                             }
                         />
-                        
-                        
                     </View>
                     <View style={stylesHome.buttonBuy}>
                         <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}>
@@ -67,7 +65,7 @@ class Home extends React.Component <Props> {
                     <View style={stylesHome.buttonSell}>
                         <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}></Button>
                     </View>
-                    <Toast ref={(ref) => Toast.setRef(ref)} />
+                    <Toast ref={(ref) => Toast.setRef(ref)}/>
                 </View>
             </SafeAreaView>
         )
