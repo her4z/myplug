@@ -19,19 +19,21 @@ class Home extends React.Component <Props> {
     state={
     };
 
-    async componentDidMount(){
-        let username = await Parse.User.current()?.getUsername();
-        Toast.show({
-            type: 'success',
-            text1: 'Login successfull',
-            text2: `Welcome back ${username}!`,
-            visibilityTime: 3000,
-            position: 'top',
-            topOffset: 75
-            
+    componentDidMount(){
+        this.props.navigation.addListener('focus',
+        ()=>{
+            Toast.show({
+                type: 'success',
+                text1: 'Login successfull',
+                text2: `Welcome back ${Parse.User.current()?.getUsername()}!`,
+                visibilityTime: 3000,
+                position: 'top',
+                topOffset: 80
+                
+            });
         });
     }
-
+    
 
     openDrawer(){
         this.props.navigation.openDrawer();
