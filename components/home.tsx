@@ -6,7 +6,7 @@ import { SearchBar, Button } from 'react-native-elements';
 import Toast from 'react-native-toast-message';
 import Parse, { User } from "parse/react-native";
 import { CommonActions } from '@react-navigation/native';
-import stylesMain from '../styles/main_css';
+import NavBar from './navBar';
 
 
 interface Props{
@@ -25,13 +25,29 @@ class Home extends React.Component <Props> {
             Toast.show({
                 type: 'success',
                 text1: 'Login successfull',
-                text2: `Welcome back ${Parse.User.current()?.getUsername()}!`,
+                text2: `Welcome back ${this.getName()}!`,
                 visibilityTime: 3000,
                 position: 'top',
-                topOffset: 80
+                topOffset: 100
                 
             });
         });
+    }
+
+    getName(){
+        let name = Parse.User.current()?.get('name');
+        if(name){
+            let charIndex = -1;
+            for(let char of name){
+                charIndex++;
+                if(char === " "){
+                    name = name.slice(0, charIndex);
+                }
+            }
+            return name;
+        }
+        let username = Parse.User.current()?.getUsername();
+        return username;
     }
     
 
@@ -43,17 +59,18 @@ class Home extends React.Component <Props> {
         return(
             <SafeAreaView>
                 <View style={stylesHome.home}>
-                    <View style={stylesHome.navBar}>
+                    <NavBar navigation = {this.props.navigation}></NavBar>
+                    {/* <View style={stylesMain.navBar}>
                         <Button
                             type="clear"
-                            buttonStyle={stylesHome.buttonDrawer}
-                            style={stylesHome.buttonDrawer}
+                            buttonStyle={stylesMain.buttonDrawer}
+                            style={stylesMain.buttonDrawer}
                             onPress={()=> this.openDrawer()}
                             icon={
                                 <Icon type="ant-design" name="bars" size={36}/>
                             }
                         />
-                    </View>
+                    </View> */}
                     <View style={stylesHome.buttonBuy}>
                         <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}>
                             <Icon name="user" type="font-awesome" size={36} style={{position: 'absolute', bottom: 30}}>

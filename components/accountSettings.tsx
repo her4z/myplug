@@ -5,10 +5,13 @@ import stylesAccountSettings from '../styles/accountSettings_css';
 import { Avatar, Icon } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import NavBar from './navBar';
+
 
 
 interface Props{
-    route: any
+    route: any,
+    navigation: any
 }
 
 class AccountSettings extends React.Component <Props>{
@@ -55,6 +58,7 @@ class AccountSettings extends React.Component <Props>{
         return(
             <SafeAreaView>
                 <View style={stylesAccountSettings.accountSettings}>
+                    <NavBar navigation={this.props.navigation}></NavBar>
                     <Avatar rounded size={125} source={{uri: this.state.imageSource}} containerStyle={stylesAccountSettings.avatar}></Avatar>
                     <Icon name='add-a-photo' type='material-icons' size={25} onPress={()=> this.uploadImage()} containerStyle={{alignSelf: 'center'}}></Icon>
                     <Text style={stylesAccountSettings.textUser}>{`${Parse.User.current()?.get('name') ? this.getName() :  Parse.User.current()?.getUsername()}`}</Text>

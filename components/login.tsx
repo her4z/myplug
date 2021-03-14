@@ -29,8 +29,12 @@ class Login extends React.Component<Props> {
         showModal: false
     };
 
-    componentDidMount(){
-        this.loadFonts();
+    async componentDidMount(){
+        await this.loadFonts();
+        let user = await Parse.User.currentAsync();
+        if(user){
+            this.props.navigation.navigate('Main');
+        }
     }
 
 
@@ -52,6 +56,7 @@ class Login extends React.Component<Props> {
         this.setState({
             fontsLoaded: true
         });
+
     }
     
 
@@ -136,7 +141,7 @@ class Login extends React.Component<Props> {
     }
     
     render(){
-        if(this.state.fontsLoaded){
+        if(this.state.fontsLoaded && this.state.fontsLoaded === true){
             return(
                 <View style={stylesLogin.login}>
                     <Image source={require('../assets/logo3.png')} style={stylesLogin.logo}></Image>
