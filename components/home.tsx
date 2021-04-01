@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { View, Text, SafeAreaView} from 'react-native';
+import { View, Text, SafeAreaView, Modal} from 'react-native';
 import stylesHome from '../styles/home_css';
-import { Icon } from 'react-native-elements';
+import { Icon, ThemeConsumer } from 'react-native-elements';
 import { SearchBar, Button } from 'react-native-elements';
 import Toast from 'react-native-toast-message';
 import Parse, { User } from "parse/react-native";
@@ -14,9 +14,12 @@ interface Props{
     navigation: any
 }
 
+
+
 class Home extends React.Component <Props> {
 
     state={
+        showModal: false
     };
 
     componentDidMount(){
@@ -28,7 +31,7 @@ class Home extends React.Component <Props> {
                 text2: `Welcome back ${this.getName()}!`,
                 visibilityTime: 3000,
                 position: 'top',
-                topOffset: 100
+                topOffset: 100,
                 
             });
         });
@@ -54,25 +57,23 @@ class Home extends React.Component <Props> {
     openDrawer(){
         this.props.navigation.openDrawer();
     }
+
+    openLogoutModal(){
+        this.setState({showModal: true});
+    }
+
+
     
     render(){
         return(
             <SafeAreaView>
                 <View style={stylesHome.home}>
                     <NavBar navigation = {this.props.navigation}></NavBar>
-                    {/* <View style={stylesMain.navBar}>
-                        <Button
-                            type="clear"
-                            buttonStyle={stylesMain.buttonDrawer}
-                            style={stylesMain.buttonDrawer}
-                            onPress={()=> this.openDrawer()}
-                            icon={
-                                <Icon type="ant-design" name="bars" size={36}/>
-                            }
-                        />
-                    </View> */}
+                    <Modal visible={this.state.showModal} transparent={true} animationType={'fade'} onRequestClose={()=> this.setState({showModal: false}) }>
+
+                    </Modal>
                     <View style={stylesHome.buttonBuy}>
-                        <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}>
+                        <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}}>
                             <Icon name="user" type="font-awesome" size={36} style={{position: 'absolute', bottom: 30}}>
 
                             </Icon>\
@@ -82,7 +83,7 @@ class Home extends React.Component <Props> {
                         
                     </View>
                     <View style={stylesHome.buttonSell}>
-                        <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#01151A'}}></Button>
+                        <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}}></Button>
                     </View>
                     <Toast ref={(ref) => Toast.setRef(ref)}/>
                 </View>

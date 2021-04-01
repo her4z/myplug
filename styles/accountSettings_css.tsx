@@ -1,24 +1,33 @@
 import { StyleSheet } from 'react-native';
 
 const stylesAccountSettings = StyleSheet.create({
-    textUser:{
-        fontFamily: 'Roboto-Regular',
-        fontSize: 40,
-        alignSelf: 'center',
-        marginTop: '5%'
-    },
     avatar:{
-        marginTop: '20%',
+        marginTop: '10%',
         alignSelf: 'center',
         borderWidth: 3,
         borderColor: '#043E4D',
         marginBottom: '5%'
     },
     accountSettings:{
-        backgroundColor: '#01151A',
+        backgroundColor: '#0E0E10',
         width: '100%',
         height: '100%',
         alignSelf: 'center'
+    },
+    containerUserData:{
+        width: '90%',
+        height: 'auto',
+        backgroundColor: '#022933',
+        alignSelf: 'center',
+    },
+    containerDividerUserData:{
+        height: 'auto',
+        width: '80%',
+        backgroundColor: '#043E4D',
+    },
+    dataText:{
+        fontFamily: 'Raleway-Regular',
+        fontSize: 16,
     }
 })
 

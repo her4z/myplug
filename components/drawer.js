@@ -8,8 +8,8 @@ import stylesDrawer from '../styles/drawer_css';
 
 function StyledDrawer({...props}){
     return(
-        <DrawerContentScrollView {...props}>
-            <Avatar rounded size={95} source={{uri: `${Parse.User.current()?.get('image')?.url()}`}} containerStyle={stylesDrawer.avatar} onPress={()=> props.navigation.navigate('Account Settings')}></Avatar>
+        <DrawerContentScrollView {...props} test="hola">
+            <Avatar rounded size={95} source={{uri: `${Parse.User.current()?.get('image')?.url()}`}} containerStyle={stylesDrawer.avatar} onPress={()=> props.navigation.navigate('Account Settings  ')}></Avatar>
             <Text style={stylesDrawer.textUsername}>{Parse.User.current()?.getUsername()}</Text>
             <DrawerItemList {...props}></DrawerItemList>
             <DrawerItem label="My Shopping/Trades"></DrawerItem>

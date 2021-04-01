@@ -23,7 +23,7 @@ class NavBar extends React.Component <Props>{
                 style={stylesMain.buttonDrawer}
                 onPress={()=> this.openDrawer()}
                 icon={
-                    <Icon type="ant-design" name="bars" size={36}/>
+                    <Icon type="ant-design" name="bars" size={36} color='white'/>
                 }
             />
             </View>

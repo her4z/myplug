@@ -3,7 +3,7 @@ import { StyleSheet} from 'react-native';
 
 const stylesLogin = StyleSheet.create({
     login:{
-        backgroundColor: '#01151A',
+        backgroundColor: '#18181B',
         width: '100%',
         height: '100%'
     },
@@ -16,19 +16,20 @@ const stylesLogin = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 2,
         marginTop: '20%',
-        fontFamily: 'Roboto-Regular',
+        fontFamily: 'Raleway-Light',
+        fontSize: 15
     },
     textinputPassword:{
         borderColor: '#055266',
-        color: 'grey',
         borderWidth: 1.25,
         marginTop: '6%',
         width: '70%',
         height:'5%',
         alignSelf: 'center',
         borderRadius: 2,
-        fontFamily: 'Roboto-Regular',
+        fontFamily: 'Raleway-Light',
         marginBottom: '12%',
+        fontSize: 15
     },
     logo:{
         resizeMode: 'contain',
@@ -40,21 +41,27 @@ const stylesLogin = StyleSheet.create({
         textAlign: 'center',
         alignSelf: 'center',
         marginTop:'10%',
-        fontSize: 30,
-        fontFamily: 'Raleway-Light'
+        fontSize: 40,
+        fontFamily: 'Raleway-Medium'
     },
     buttonLogin:{
-        fontFamily: 'Roboto-Regular',
         width:'70%',
         alignSelf: 'center',
     },
     textRegister:{
-        fontFamily: 'Roboto-Regular',
+        fontFamily: 'Raleway-Light',
         fontSize: 12.5,
         textAlign: 'center',
-        marginTop: '10%'
+        marginTop: '2%'
     },
     textRegisterLink:{
+        color: 'blue'
+    },
+    textForgotPassword:{
+        fontFamily: 'Raleway-Light',
+        fontSize: 12.5,
+        textAlign: 'center',
+        marginTop: '10%',
         color: 'blue'
     },
     modalRegister:{
@@ -67,7 +74,7 @@ const stylesLogin = StyleSheet.create({
         opacity: 0.95,
         marginTop: '70%',
         alignSelf: 'center',
-        fontFamily: 'Roboto-Regular',
+        fontFamily: 'Raleway-Light',
         backgroundColor: '#01151A'
     },
     textinputRegisterUser:{
@@ -79,8 +86,8 @@ const stylesLogin = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 2,
         marginTop: '15%',
-        fontFamily: 'Roboto-Regular',
-        fontSize: 12,
+        fontFamily: 'Raleway-Light',
+        fontSize: 15,
         marginBottom:'10%'
     },
     textinputRegisterPassword:{
@@ -91,8 +98,20 @@ const stylesLogin = StyleSheet.create({
         height: '10%',
         alignSelf: 'center',
         borderRadius: 2,
-        fontFamily: 'Roboto-Regular',
-        fontSize: 12,
+        fontFamily: 'Raleway-Light',
+        fontSize: 15,
+        marginBottom: '10%'
+    },
+    textinputRegisterEmail:{
+        borderColor: '#055266',
+        color: 'grey',
+        borderWidth: 1.25,
+        width: '90%',
+        height: '10%',
+        alignSelf: 'center',
+        borderRadius: 2,
+        fontFamily: 'Raleway-Light',
+        fontSize: 15,
         marginBottom: '10%'
     },
     textinputRegisterPassword2:{
@@ -103,15 +122,15 @@ const stylesLogin = StyleSheet.create({
         height: '10%',
         alignSelf: 'center',
         borderRadius: 2,
-        fontFamily: 'Roboto-Regular',
-        fontSize: 12,
+        fontFamily: 'Raleway-Light',
+        fontSize: 15,
     },
     buttonSignUp:{
-        fontFamily: 'Roboto-Regular',
         width:'95%',
         height:'40%',
         alignSelf: 'center',
-        marginTop:'20%'
+        marginTop:'10%',
+        fontSize: 12.5
     }
 });
 

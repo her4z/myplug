@@ -11,16 +11,18 @@ const stylesDrawer = StyleSheet.create({
         marginBottom: '10%',
         fontFamily: 'Roboto-Regular',
         fontSize: 15,
+        color: 'white'
     },
     textLogout:{
         marginLeft: '45%',
         fontFamily: 'Roboto-Regular',
+        color: 'white'
     },
     itemLogout:{
         borderWidth: 1.75,
         borderColor: '#01151A',
         marginTop: '20%',
-        backgroundColor: '#043E4D'
+        backgroundColor: '#4b1f8c',
     }
 })
 

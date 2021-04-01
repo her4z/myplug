@@ -7,7 +7,7 @@ const stylesMain = StyleSheet.create({
     navBar:{
         width:'100%',
         height:'10%',
-        backgroundColor: '#022933'
+        backgroundColor: '#18181B'
     },
     buttonDrawer:{
         width: '15%',

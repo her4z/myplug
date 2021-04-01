@@ -2,7 +2,7 @@ import { StyleSheet} from 'react-native';
 
 const stylesHome = StyleSheet.create({
     home:{
-        backgroundColor: '#01151A',
+        backgroundColor: '#0E0E10',
         width: '100%',
         height: '100%'
     },
@@ -17,7 +17,8 @@ const stylesHome = StyleSheet.create({
     midLine:{
         width: '100%',
         height: '0.5%',
-        backgroundColor: '#055266'
+        backgroundColor: '#4b1f8c',
+        opacity: 1
     }
 
 });
