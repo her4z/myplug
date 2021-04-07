@@ -1,18 +1,19 @@
-import { StyleSheet} from 'react-native';
+import { StyleSheet, Dimensions} from 'react-native';
+
+const window = Dimensions.get('window');
 
 
 const stylesLogin = StyleSheet.create({
     login:{
         backgroundColor: '#18181B',
-        width: '100%',
-        height: '100%'
+        flex: 1
     },
     textinputUser:{
         borderColor: '#055266',
         color: 'grey',
         borderWidth: 1.25,
         width: '70%',
-        height: '5%',
+        height: (window.height * 0.05),
         alignSelf: 'center',
         borderRadius: 2,
         marginTop: '20%',
@@ -24,7 +25,7 @@ const stylesLogin = StyleSheet.create({
         borderWidth: 1.25,
         marginTop: '6%',
         width: '70%',
-        height:'5%',
+        height: (window.height * 0.05),
         alignSelf: 'center',
         borderRadius: 2,
         fontFamily: 'Raleway-Light',

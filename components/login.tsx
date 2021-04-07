@@ -1,6 +1,6 @@
 import React from 'react';
 import stylesLogin from '../styles/login_css';
-import { View, TextInput, Image, Text, Modal} from 'react-native';
+import { View, TextInput, Image, Text, Modal, KeyboardAvoidingView} from 'react-native';
 import * as Font from 'expo-font';
 import {Button, Card, ThemeConsumer} from 'react-native-elements';
 import Parse, { User } from "parse/react-native";
@@ -193,7 +193,7 @@ class Login extends React.Component<Props> {
     render(){
         if(this.state.fontsLoaded && this.state.fontsLoaded === true){
             return(
-                <View style={stylesLogin.login}>
+                <KeyboardAvoidingView style={stylesLogin.login} behavior="padding">
                     <Image source={require('../assets/logo3.png')} style={stylesLogin.logo}></Image>
                     <Text style={stylesLogin.brand}>My Plug</Text>
                     <TextInput style={stylesLogin.textinputUser} placeholder=" Username/Email" autoCapitalize="none" value={this.state.user} onChangeText={(value)=> this.changeTextInput(value, 'user')}></TextInput>
@@ -217,9 +217,7 @@ class Login extends React.Component<Props> {
                             </View>
                         </Card>
                     </Modal>
-
-                    
-                </View>
+                </KeyboardAvoidingView>
             )
         }else{
             return null;

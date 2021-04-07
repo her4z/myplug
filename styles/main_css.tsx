@@ -1,4 +1,6 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+
+const window = Dimensions.get('window');
 
 const stylesMain = StyleSheet.create({
     main:{
@@ -6,7 +8,7 @@ const stylesMain = StyleSheet.create({
     },
     navBar:{
         width:'100%',
-        height:'10%',
+        height: (window.height * 0.11),
         backgroundColor: '#18181B'
     },
     buttonDrawer:{

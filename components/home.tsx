@@ -62,6 +62,10 @@ class Home extends React.Component <Props> {
         this.setState({showModal: true});
     }
 
+    buyButtonClicked(){
+        this.props.navigation.navigate('Buyer Main');
+    }
+
 
     
     render(){
@@ -73,7 +77,7 @@ class Home extends React.Component <Props> {
 
                     </Modal>
                     <View style={stylesHome.buttonBuy}>
-                        <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}}>
+                        <Button title={`Buy${'\n'}Or${'\n'}Trade`} titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular', textAlign: 'center', width: '100%'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}} onPress={()=> this.buyButtonClicked()}>
                             <Icon name="user" type="font-awesome" size={36} style={{position: 'absolute', bottom: 30}}>
 
                             </Icon>\
