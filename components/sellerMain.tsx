@@ -87,7 +87,7 @@ class SellerMain extends React.Component <Props>{
                                 data={this.state.searchedProducts}
                                 renderItem= {( {item} )=>
                                 <TouchableOpacity onPress={()=> this.productItemClicked(item)}>
-                                        <Text style={{textAlign: 'left', width: '80%', alignSelf: 'center', fontFamily: 'Raleway-Medium'}}>{`${item.name}`}</Text>
+                                        <Text style={{textAlign: 'left', width: '80%', alignSelf: 'center', fontFamily: 'Raleway-Medium'}}>{`${item['name']}`}</Text>
                                     </TouchableOpacity>
                                 }
                                 ListHeaderComponent={<SearchBar containerStyle={stylesSellerMain.searchBar} inputStyle={{fontFamily: 'Raleway-Light'}} placeholder="Search sneakers, streetwear..." round={true} value={this.state.searchText} onChangeText={(text)=> this.search(text)} onClear={()=> this.search('')}/>}
