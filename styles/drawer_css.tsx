@@ -9,14 +9,20 @@ const stylesDrawer = StyleSheet.create({
         textAlign: 'center',
         marginTop: '3%',
         marginBottom: '10%',
-        fontFamily: 'Roboto-Regular',
-        fontSize: 15,
+        fontFamily: 'Raleway-Medium',
+        fontSize: 16,
+        color: 'white'
+    },
+    text:{
+        fontFamily: 'Raleway-Light',
+        fontSize: 14,
         color: 'white'
     },
     textLogout:{
-        marginLeft: '45%',
-        fontFamily: 'Roboto-Regular',
-        color: 'white'
+        fontFamily: 'Raleway-Medium',
+        color: 'white',
+        marginLeft: '44.5%',
+        fontSize: 16
     },
     itemLogout:{
         borderWidth: 1.75,

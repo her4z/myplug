@@ -8,21 +8,26 @@ import * as Font from 'expo-font';
 
 
 
-
 interface Props{
     route: any,
     navigation: any
 }
 
 class BuyerMain extends React.Component <Props>{
-
+    
+    
     state= {
         fontsLoaded: false,
-        searchText: ''
+        searchText: '',
     };
     
     async componentDidMount(){
         await this.loadFonts();
+    }
+
+
+    async search(text:string){
+        this.setState({searchText: text});
     }
     
 
@@ -45,6 +50,7 @@ class BuyerMain extends React.Component <Props>{
             fontsLoaded: true
         });
 
+
     }
 
     render(){
@@ -54,7 +60,7 @@ class BuyerMain extends React.Component <Props>{
                     <KeyboardAvoidingView style={stylesBuyerMain.buyerMain} behavior="padding">
                         <NavBar navigation={this.props.navigation}></NavBar>
                         <View style={stylesBuyerMain.container}>
-                            <SearchBar containerStyle={stylesBuyerMain.searchBar} inputStyle={{fontFamily: 'Raleway-Light'}} placeholder="Search..." round={true} value={this.state.searchText} onChangeText={(text)=> this.setState({searchText: text})} onClear={()=> this.setState({searchText: ''})}></SearchBar>
+                            <SearchBar containerStyle={stylesBuyerMain.searchBar} inputStyle={{fontFamily: 'Raleway-Light'}} placeholder="Search..." round={true} value={this.state.searchText} onChangeText={(text)=> this.search(text)} onClear={()=> this.search('')}></SearchBar>
                         </View>
                     </KeyboardAvoidingView>
                 </SafeAreaView>

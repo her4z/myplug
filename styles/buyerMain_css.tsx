@@ -15,6 +15,8 @@ const stylesBuyerMain = StyleSheet.create({
     },
     searchBar:{
         marginTop: (window.height * 0.03),
+        width: (window.width * 0.9),
+        alignSelf: 'center',
         backgroundColor: '#0E0E10',
         borderWidth: 0,
         borderBottomColor: 'transparent',

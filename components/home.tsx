@@ -66,6 +66,10 @@ class Home extends React.Component <Props> {
         this.props.navigation.navigate('Buyer Main');
     }
 
+    sellButtonClicked(){
+        this.props.navigation.navigate('Seller Stack');
+    }
+
 
     
     render(){
@@ -87,7 +91,7 @@ class Home extends React.Component <Props> {
                         
                     </View>
                     <View style={stylesHome.buttonSell}>
-                        <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}}></Button>
+                        <Button title="Sell" titleStyle={{fontSize: 80, fontFamily: 'Raleway-Regular'}} buttonStyle={{width: '100%', height:'100%', backgroundColor: '#0E0E10'}} onPress={()=> this.sellButtonClicked()}></Button>
                     </View>
                     <Toast ref={(ref) => Toast.setRef(ref)}/>
                 </View>

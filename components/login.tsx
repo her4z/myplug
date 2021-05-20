@@ -7,10 +7,6 @@ import Parse, { User } from "parse/react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 
-Parse.setAsyncStorage(AsyncStorage);
-Parse.initialize("5VkdWJ3nBCqG3OzurM86MNPEtRudm7eTcWPXLYIr", "iurB11v84oyOQWyqrSyGvaSwp6tQKBakg8vyEIge");
-Parse.serverURL = 'https://parseapi.back4app.com/';
-
 interface Props{
     navigation: any
 }
@@ -104,7 +100,6 @@ class Login extends React.Component<Props> {
                 user.set('username', this.state.registerUser);
                 user.set('email', this.state.registerEmail);
                 user.set('password', this.state.registerPassword);
-                console.log(user);
                 user.isValid
                 user.signUp()
                 .then((user)=>{

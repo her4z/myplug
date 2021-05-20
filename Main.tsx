@@ -5,7 +5,10 @@ import AccountSettings from './components/accountSettings';
 import StyledDrawer from './components/drawer';
 import Parse, { User } from "parse/react-native";
 import BuyerMain from './components/buyerMain';
+import SellerMain from './components/sellerMain';
+import SellerCreate1 from './components/sellerCreate1';
 import { createStackNavigator } from '@react-navigation/stack';
+
 
 
 
@@ -17,6 +20,16 @@ function HomeStack(){
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="Home" component={Home}/>
             <Stack.Screen name="Buyer Main" component={BuyerMain}/>
+            <Stack.Screen name="Seller Stack" component={SellerStack}/>
+        </Stack.Navigator>
+    )
+}
+
+function SellerStack(){
+    return(
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="Seller Main" component={SellerMain}/>
+            <Stack.Screen name="Seller Create1" component={SellerCreate1}/>
         </Stack.Navigator>
     )
 }

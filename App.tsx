@@ -5,9 +5,16 @@ import Login from './components/login';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Main from './Main'
+import Parse, { User } from "parse/react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Main from './Main';
 
 
+
+
+Parse.setAsyncStorage(AsyncStorage);
+Parse.initialize("5VkdWJ3nBCqG3OzurM86MNPEtRudm7eTcWPXLYIr", "iurB11v84oyOQWyqrSyGvaSwp6tQKBakg8vyEIge");
+Parse.serverURL = 'https://parseapi.back4app.com/';
 
 
 
