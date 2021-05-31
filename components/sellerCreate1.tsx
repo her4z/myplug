@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { View, Text, SafeAreaView, TextInput, KeyboardAvoidingView, FlatList} from 'react-native';
+import { View, Text, SafeAreaView, TextInput, KeyboardAvoidingView, FlatList, ScrollView} from 'react-native';
+import {Card} from 'react-native-elements';
 
 
 
@@ -21,7 +22,15 @@ class SellerCreate1 extends React.Component <Props>{
 
     render(){
         return(
-            <React.Fragment></React.Fragment>
+            <SafeAreaView style={{width: '100%', height: '100%'}}>
+                <View style={{width: '100%', height: '100%', backgroundColor: '#0E0E10'}}>
+                    <ScrollView style={{width: '80%', maxHeight: '60%', alignSelf: 'center', marginTop: '30%'}}>
+                        <Text style={{color: 'white'}}>
+                            {JSON.stringify(this.state.product)}
+                        </Text>
+                    </ScrollView>
+                </View>  
+            </SafeAreaView>
 
         )
     }

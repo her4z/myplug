@@ -26,8 +26,8 @@ class SellerMain extends React.Component <Props>{
         selectedProduct: undefined
     };
 
-    async componentDidMount(){
-        await this.loadFonts();
+    componentDidMount(){
+        this.loadFonts();
     }
 
     async loadFonts(){
@@ -52,8 +52,12 @@ class SellerMain extends React.Component <Props>{
 
     async search(text:string){
         this.setState({searchText: text});
-        const res = await API.get('stockxAPI', `/products?text=${text}`, {});
-        this.setState({searchedProducts: res.data});
+        await API.get('stockxAPI', `/products?text=${text}`, {})
+        .then((res)=>{
+            this.setState({searchedProducts: res.data});
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
     nextButtonClicked(){
@@ -87,14 +91,14 @@ class SellerMain extends React.Component <Props>{
                                 data={this.state.searchedProducts}
                                 renderItem= {( {item} )=>
                                 <TouchableOpacity onPress={()=> this.productItemClicked(item)}>
-                                        <Text style={{textAlign: 'left', width: '80%', alignSelf: 'center', fontFamily: 'Raleway-Medium'}}>{`${item['name']}`}</Text>
+                                        <Text style={{textAlign: 'left', width: '80%', alignSelf: 'center', fontFamily: 'Raleway-Medium', color: 'white'}}>{`${item['name']}`}</Text>
                                     </TouchableOpacity>
                                 }
                                 ListHeaderComponent={<SearchBar containerStyle={stylesSellerMain.searchBar} inputStyle={{fontFamily: 'Raleway-Light'}} placeholder="Search sneakers, streetwear..." round={true} value={this.state.searchText} onChangeText={(text)=> this.search(text)} onClear={()=> this.search('')}/>}
                                 ListFooterComponent={
                                     <React.Fragment>
                                         <Text style={stylesSellerMain.text2}>Or</Text>
-                                        <TextInput placeholder="Type product title..." style={stylesSellerMain.text3} value={this.state.productTitleText} onChangeText={(text)=> this.setState({productTitleText: text})}></TextInput>
+                                        <TextInput placeholder="Type product title..." style={stylesSellerMain.text3} placeholderTextColor="grey" value={this.state.productTitleText} onChangeText={(text)=> this.setState({productTitleText: text})}></TextInput>
                                     </React.Fragment>
                                 }
                                 style={stylesSellerMain.searchList}
@@ -102,7 +106,7 @@ class SellerMain extends React.Component <Props>{
                             <View style={stylesSellerMain.button}>
                                 <Button title="Next" titleStyle={{fontFamily: 'Raleway-Medium', fontSize: 16}} buttonStyle={{backgroundColor: '#4b1f8c'}} onPress={()=> this.nextButtonClicked()}/>
                             </View>
-                            <View style={stylesSellerMain.button}>
+                            <View style={stylesSellerMain.button2}>
                                 <Button title="Cancel" titleStyle={{fontFamily: 'Raleway-Medium', fontSize: 16}}  buttonStyle={{borderColor: '#4b1f8c', borderWidth: 2, backgroundColor: 'transparent'}} onPress={()=> this.props.navigation.goBack()}></Button>
                             </View>
                         </View>

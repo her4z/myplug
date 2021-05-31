@@ -5,8 +5,8 @@ const window = Dimensions.get('window');
 
 const stylesLogin = StyleSheet.create({
     login:{
-        backgroundColor: '#18181B',
-        flex: 1
+        backgroundColor: '#18181A',
+        flex: 1,
     },
     textinputUser:{
         borderColor: '#055266',
@@ -30,7 +30,8 @@ const stylesLogin = StyleSheet.create({
         borderRadius: 2,
         fontFamily: 'Raleway-Light',
         marginBottom: '12%',
-        fontSize: 15
+        fontSize: 15,
+        color: 'grey'
     },
     logo:{
         resizeMode: 'contain',
@@ -43,7 +44,8 @@ const stylesLogin = StyleSheet.create({
         alignSelf: 'center',
         marginTop:'10%',
         fontSize: 40,
-        fontFamily: 'Raleway-Medium'
+        fontFamily: 'Raleway-Medium',
+        color: 'white'
     },
     buttonLogin:{
         width:'70%',
@@ -53,17 +55,18 @@ const stylesLogin = StyleSheet.create({
         fontFamily: 'Raleway-Light',
         fontSize: 12.5,
         textAlign: 'center',
-        marginTop: '2%'
+        marginTop: '2%',
+        color: 'white'
     },
     textRegisterLink:{
-        color: 'blue'
+        color: '#A489B2'
     },
     textForgotPassword:{
         fontFamily: 'Raleway-Light',
         fontSize: 12.5,
         textAlign: 'center',
         marginTop: '10%',
-        color: 'blue'
+        color: '#A489B2'
     },
     modalRegister:{
         width: '100%',
@@ -72,7 +75,7 @@ const stylesLogin = StyleSheet.create({
     cardRegister:{
         height: '60%',
         width: '90%',
-        opacity: 0.95,
+        opacity: 1,
         marginTop: '70%',
         alignSelf: 'center',
         fontFamily: 'Raleway-Light',

@@ -191,10 +191,10 @@ class Login extends React.Component<Props> {
                 <KeyboardAvoidingView style={stylesLogin.login} behavior="padding">
                     <Image source={require('../assets/logo3.png')} style={stylesLogin.logo}></Image>
                     <Text style={stylesLogin.brand}>My Plug</Text>
-                    <TextInput style={stylesLogin.textinputUser} placeholder=" Username/Email" autoCapitalize="none" value={this.state.user} onChangeText={(value)=> this.changeTextInput(value, 'user')}></TextInput>
-                    <TextInput style={stylesLogin.textinputPassword} placeholder=" Password" secureTextEntry={true} autoCapitalize="none" value={this.state.password} onChangeText={(value) => this.changeTextInput(value, 'password')}></TextInput>
+                    <TextInput style={stylesLogin.textinputUser} placeholder=" Username/Email" placeholderTextColor="grey" autoCapitalize="none" value={this.state.user} onChangeText={(value)=> this.changeTextInput(value, 'user')}></TextInput>
+                    <TextInput style={stylesLogin.textinputPassword} placeholder=" Password" placeholderTextColor="grey" secureTextEntry={true} autoCapitalize="none" value={this.state.password} onChangeText={(value) => this.changeTextInput(value, 'password')}></TextInput>
                     <View style={stylesLogin.buttonLogin}>
-                        <Button title="Log in" type="solid" disabled={this.state.loginButtonDisabled} buttonStyle={{borderRadius: 4, backgroundColor: '#022933'}} raised={true} loading={this.state.isButtonLoading} onPress={() => this.loginButtonClicked()}></Button>
+                        <Button title="Log in" type="solid" disabled={this.state.loginButtonDisabled} disabledStyle={{borderRadius: 4, backgroundColor: '#022833'}} buttonStyle={{borderRadius: 4, backgroundColor: '#022833'}} raised={true} loading={this.state.isButtonLoading} onPress={() => this.loginButtonClicked()}></Button>
                     </View>
                     <Toast ref={(ref) => Toast.setRef(ref)} />
                     <Text style={stylesLogin.textForgotPassword} onPress={()=> {this.forgotPasswordButtonClicked()}}>Forgot password?</Text>
@@ -203,10 +203,10 @@ class Login extends React.Component<Props> {
                     </Text>
                     <Modal visible={this.state.showModal} transparent={true} style={stylesLogin.modalRegister} animationType={'slide'} onRequestClose={()=> this.setState({showModal: false, registerUser: '', registerPassword: '', registerRePassword: ''}) }>
                         <Card containerStyle={stylesLogin.cardRegister}>
-                            <TextInput style={stylesLogin.textinputRegisterUser} placeholder=" Username" autoCapitalize="none" value={this.state.registerUser} onChangeText={(value) => {this.setState({registerUser: value}); } }></TextInput>
-                            <TextInput style={stylesLogin.textinputRegisterEmail} placeholder=" Email Address" autoCapitalize="none" value={this.state.registerEmail} onChangeText={(value) => this.setState({registerEmail: value})}></TextInput>
-                            <TextInput style={stylesLogin.textinputRegisterPassword} placeholder=" Password" secureTextEntry={true} autoCapitalize="none" value={this.state.registerPassword} onChangeText={(value) => this.setState({registerPassword: value})}></TextInput>
-                            <TextInput style={stylesLogin.textinputRegisterPassword2} placeholder=" Re-enter password" secureTextEntry={true} autoCapitalize="none" value={this.state.registerRePassword} onChangeText={(value) => this.setState({registerRePassword: value})}></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterUser} placeholder=" Username" placeholderTextColor="grey" autoCapitalize="none" value={this.state.registerUser} onChangeText={(value) => {this.setState({registerUser: value}); } }></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterEmail} placeholder=" Email Address" placeholderTextColor="grey" autoCapitalize="none" value={this.state.registerEmail} onChangeText={(value) => this.setState({registerEmail: value})}></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterPassword} placeholder=" Password" placeholderTextColor="grey" secureTextEntry={true} autoCapitalize="none" value={this.state.registerPassword} onChangeText={(value) => this.setState({registerPassword: value})}></TextInput>
+                            <TextInput style={stylesLogin.textinputRegisterPassword2} placeholder=" Re-enter password" placeholderTextColor="grey" secureTextEntry={true} autoCapitalize="none" value={this.state.registerRePassword} onChangeText={(value) => this.setState({registerRePassword: value})}></TextInput>
                             <View style={stylesLogin.buttonSignUp} >
                                 <Button type="solid" title="Create account" buttonStyle={{borderRadius: 4, backgroundColor: '#022933'}} raised={true} loading={this.state.isButtonLoading2} onPress={()=> this.createAccount()}></Button>
                             </View>

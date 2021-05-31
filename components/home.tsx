@@ -32,7 +32,6 @@ class Home extends React.Component <Props> {
                 visibilityTime: 3000,
                 position: 'top',
                 topOffset: 100,
-                
             });
         });
     }

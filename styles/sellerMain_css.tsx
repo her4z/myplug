@@ -16,7 +16,8 @@ const stylesSellerMain = StyleSheet.create({
         fontFamily: 'Raleway-Medium',
         textAlign: 'center',
         marginTop: (window.height * 0.15),
-        fontSize: 22
+        fontSize: 22,
+        color: 'white'
     },
     searchBar:{
         marginTop: (window.height * 0.03),
@@ -33,6 +34,7 @@ const stylesSellerMain = StyleSheet.create({
         marginTop: '10%',
         marginBottom: '5%',
         fontSize: 22,
+        color: 'white'
     },
     text3:{
         fontFamily: 'Raleway-Light',
@@ -46,17 +48,23 @@ const stylesSellerMain = StyleSheet.create({
         borderTopColor: 'transparent',
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
-        marginTop: '5%'
+        marginTop: '5%',
+        color: 'grey'
 
     },
     searchList:{
         maxHeight: window.height * 0.4,
-        marginTop: window.height * 0.05
+        marginTop: window.height * 0.05,
+        marginBottom: '5%'
     },
     button:{
         width: '60%',
         alignSelf: 'center',
-        marginTop: '10%',
+    },
+    button2:{
+        width: '60%',
+        alignSelf: 'center',
+        marginTop: '10%'
     }
 });
 
