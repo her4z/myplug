@@ -40,7 +40,7 @@ const stylesSellerMain = StyleSheet.create({
         fontFamily: 'Raleway-Light',
         textAlign: 'center',
         fontSize: 16,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 5,
         width: '80%',
         alignSelf: 'center',
@@ -48,6 +48,7 @@ const stylesSellerMain = StyleSheet.create({
         borderTopColor: 'transparent',
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
+        borderBottomColor: 'grey',
         marginTop: '5%',
         color: 'grey'
 
