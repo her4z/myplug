@@ -198,3 +198,6 @@ amplifytools.xcconfig
 .secret-*
 .vscode/
 amplify/
+
+package-lock.json
+expo/
