@@ -51,6 +51,7 @@
     "react-autosuggest": "^10.1.0",
     "react-dom": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-dropdown-picker": "^5.1.21",
     "react-native-elements": "^3.1.0",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-level-fs": "^3.0.0",

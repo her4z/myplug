@@ -16,7 +16,7 @@ function StyledDrawer({...props}){
             </DrawerItemList>
             <DrawerItem label="Shopping/Trades history" labelStyle={stylesDrawer.text}></DrawerItem>
             <DrawerItem label="Sells history" labelStyle={stylesDrawer.text}></DrawerItem>
-            <DrawerItem label="Tems & Conditions" labelStyle={stylesDrawer.text}></DrawerItem>
+            <DrawerItem label="Terms & Conditions" labelStyle={stylesDrawer.text}></DrawerItem>
             <DrawerItem label="Log out" style={stylesDrawer.itemLogout} labelStyle={stylesDrawer.textLogout} onPress={()=>{Parse.User.logOut(); props.navigation.navigate('Login');}}>
             </DrawerItem>
         </DrawerContentScrollView>

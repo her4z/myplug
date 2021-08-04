@@ -7,7 +7,6 @@ import Parse, { User } from "parse/react-native";
 import stylesSellerMain from '../styles/sellerMain_css';
 import { API } from 'aws-amplify';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useIsFocused } from '@react-navigation/core';
 
 
 
@@ -50,9 +49,10 @@ class SellerMain extends React.Component <Props>{
         });
     }
 
+
     async search(text:string){
         this.setState({searchText: text});
-        await API.get('stockxAPI', `/products?text=${text}`, {})
+        API.get('stockxAPI', `/products?text=${text}`, {})
         .then((res)=>{
             this.setState({searchedProducts: res.data});
         }).catch((err)=>{
