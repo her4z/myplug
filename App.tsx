@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Parse, { User } from "parse/react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Main from './Main';
+import { withAuthenticator } from 'aws-amplify-react-native'
 
 
 
@@ -18,10 +19,10 @@ Parse.serverURL = 'https://parseapi.back4app.com/';
 
 
 
-
+ 
 const Stack = createStackNavigator();
 
-export default function App() {
+function App() {
   return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: false}}>
@@ -47,3 +48,5 @@ const styles = StyleSheet.create({
     height: '100%'
   },
 });
+
+export default withAuthenticator(App)
