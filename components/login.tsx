@@ -6,6 +6,7 @@ import {Button, Card, ThemeConsumer} from 'react-native-elements';
 import Parse, { User } from "parse/react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
+import { Auth } from 'aws-amplify';
 
 interface Props{
     navigation: any
@@ -27,164 +28,219 @@ class Login extends React.Component<Props> {
         loginButtonDisabled: true
     };
 
-    async componentDidMount(){
-        await this.loadFonts();
-        let user = await Parse.User.currentAsync();
-        if(user){
-            this.props.navigation.navigate('Main');
-        }
-    }
-
-
-    async loadFonts(){
-        await Font.loadAsync({
-            'Raleway-Light':{
-                uri: require('../assets/fonts/Raleway-Light.ttf')
-            },
-            'Raleway-Medium':{
-                uri: require('../assets/fonts/Raleway-Medium.ttf')
-            },
-            'Raleway-Regular':{
-                uri: require('../assets/fonts/Raleway-Regular.ttf')
-            },
-            'Roboto-Regular':{
-                uri: require('../assets/fonts/Roboto-Regular.ttf')
-            }
-        });
-        this.setState({
-            fontsLoaded: true
-        });
-
-    }
-    
-
-    async loginButtonClicked(){
-        this.setState({isButtonLoading: true});
-        
-        await Parse.User.logIn(this.state.user, this.state.password)
-        .then( ()=>{
-            this.props.navigation.navigate('Main');
-            this.setState({user: '', password: ''});
-        }).catch( (err)=>{
-            let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
-            this.setState({showToast: 'block'});
-            Toast.show({
-                type: 'error',
-                text1: 'Login failed',
-                text2: errorMessage,
-                visibilityTime: 3000,
-                position: 'top',
-                topOffset: 75
-            }
-            );
-
-        })
-        this.setState({isButtonLoading: false});
-    }
-
-    registerButtonClicked(){
-        this.setState({showModal: true});
-    }
-
-    async validateEmail(email:string){
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-    async createAccount(){
-        this.setState({isButtonLoading2: true});
-        
-        if(this.state.registerEmail && await this.validateEmail(this.state.registerEmail)){
-            if(this.state.registerPassword === this.state.registerRePassword){
-                let user = new Parse.User();
-                user.set('username', this.state.registerUser);
-                user.set('email', this.state.registerEmail);
-                user.set('password', this.state.registerPassword);
-                user.isValid
-                user.signUp()
-                .then((user)=>{
-                    this.setState({
-                        showModal: false,
-                        isButtonLoading2: false,
-                        registerUser: '',
-                        registerEmail: '',
-                        registerPassword: '',
-                        registerRePassword: ''
-                    });
-                    Toast.show({
-                        type: 'success',
-                        text1: 'Account created',
-                        visibilityTime: 3000,
-                        position: 'top',
-                        topOffset: 75
-            
-                    })
-                }).catch((err)=>{
-                    let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
-                    this.setState({showToast: 'block'});
-                    Toast.show({
-                        type: 'error',
-                        text1: 'Account creation failed',
-                        text2: errorMessage,
-                        visibilityTime: 3000,
-                        position: 'top',
-                        topOffset: 75
-                    });
-                    this.setState({isButtonLoading2: false});
-        
-                })
-            }else{
-                Toast.show({
-                    type: 'error',
-                    text1: 'Account creation failed',
-                    text2: 'Both passwords must match',
-                    visibilityTime: 3000,
-                    position: 'top',
-                    topOffset: 75
-                });
-                this.setState({isButtonLoading2: false});
-            }
-        }else{
-            Toast.show({
-                type: 'error',
-                text1: 'Account creation failed',
-                text2: 'Email address is not valid.',
-                visibilityTime: 3000,
-                position: 'top',
-                topOffset: 75
+    async signUp(){
+        try{
+            const{ user } = await Auth.signUp({
+                username: '',
+                password: '',
+                attributes: {
+                    email:'',
+                    phone_number: '',
+                }
             });
-            this.setState({isButtonLoading2: false});
+            console.log(user);
+        }catch(error){
+            console.log('Error signing up:', error);
         }
     }
 
-    changeTextInput(text:string, property:string){
-        switch(property){
-            case 'user':
-                this.setState({user: text}, ()=>{
-                    if(this.state.user == '' || this.state.password == ''){
-                        this.setState({loginButtonDisabled: true})
-                    }else{
-                        this.setState({loginButtonDisabled: false})
-                    }
-                });
-                break;
-            case 'password':
-                this.setState({password: text}, ()=>{
-                    if(this.state.user == '' || this.state.password == ''){
-                        this.setState({loginButtonDisabled: true})
-                    }else{
-                        this.setState({loginButtonDisabled: false})
-                    }
-                });
-                break;
+    async confirmSignUp(){
+        // Es la autenticacion de dos factores basicamente
+        try{
+            declare var username:any, code:any;
+            await Auth.confirmSignUp(username, code);
+        }catch(error) {
+            console.log('error confirming sign up', error);
         }
-
     }
 
-    forgotPasswordButtonClicked(){
+    async signIn(){
+        try{
+            declare var username:any, password:any;
+            const user = await Auth.signIn(username, password);
+        }catch(error){
+            console.log('error signing in', error);
+        }
+    }
+
+    async resendConfirmationCode(){
+        try{
+            declare var username:any;
+            await Auth.resendSignUp(username);
+            console.log('Code resent successfully');
+        }catch(error){
+            console.log('eror sending code:', error);
+        }
+    }
+
+    async signOut(){
+        try{
+            await Auth.signOut(); // Aca se puede hacer un signout global pasandole {global: true} al signout()
+        }catch(error){
+            console.log('error signing out', error);
+        }
+    }
+
 
     }
+    // async componentDidMount(){
+    //     await this.loadFonts();
+    //     let user = await Parse.User.currentAsync();
+    //     if(user){
+    //         this.props.navigation.navigate('Main');
+    //     }
+    // }
+
+
+    // async loadFonts(){
+    //     await Font.loadAsync({
+    //         'Raleway-Light':{
+    //             uri: require('../assets/fonts/Raleway-Light.ttf')
+    //         },
+    //         'Raleway-Medium':{
+    //             uri: require('../assets/fonts/Raleway-Medium.ttf')
+    //         },
+    //         'Raleway-Regular':{
+    //             uri: require('../assets/fonts/Raleway-Regular.ttf')
+    //         },
+    //         'Roboto-Regular':{
+    //             uri: require('../assets/fonts/Roboto-Regular.ttf')
+    //         }
+    //     });
+    //     this.setState({
+    //         fontsLoaded: true
+    //     });
+
+    // }
     
+
+    // async loginButtonClicked(){
+    //     this.setState({isButtonLoading: true});
+        
+    //     await Parse.User.logIn(this.state.user, this.state.password)
+    //     .then( ()=>{
+    //         this.props.navigation.navigate('Main');
+    //         this.setState({user: '', password: ''});
+    //     }).catch( (err)=>{
+    //         let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
+    //         this.setState({showToast: 'block'});
+    //         Toast.show({
+    //             type: 'error',
+    //             text1: 'Login failed',
+    //             text2: errorMessage,
+    //             visibilityTime: 3000,
+    //             position: 'top',
+    //             topOffset: 75
+    //         }
+    //         );
+
+    //     })
+    //     this.setState({isButtonLoading: false});
+    // }
+
+    // registerButtonClicked(){
+    //     this.setState({showModal: true});
+    // }
+
+    // async validateEmail(email:string){
+    //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(String(email).toLowerCase());
+    // }
+
+    // async createAccount(){
+    //     this.setState({isButtonLoading2: true});
+        
+    //     if(this.state.registerEmail && await this.validateEmail(this.state.registerEmail)){
+    //         if(this.state.registerPassword === this.state.registerRePassword){
+    //             let user = new Parse.User();
+    //             user.set('username', this.state.registerUser);
+    //             user.set('email', this.state.registerEmail);
+    //             user.set('password', this.state.registerPassword);
+    //             user.isValid
+    //             user.signUp()
+    //             .then((user)=>{
+    //                 this.setState({
+    //                     showModal: false,
+    //                     isButtonLoading2: false,
+    //                     registerUser: '',
+    //                     registerEmail: '',
+    //                     registerPassword: '',
+    //                     registerRePassword: ''
+    //                 });
+    //                 Toast.show({
+    //                     type: 'success',
+    //                     text1: 'Account created',
+    //                     visibilityTime: 3000,
+    //                     position: 'top',
+    //                     topOffset: 75
+            
+    //                 })
+    //             }).catch((err)=>{
+    //                 let errorMessage = err.message.charAt(0).toUpperCase() + err.message.slice(1);
+    //                 this.setState({showToast: 'block'});
+    //                 Toast.show({
+    //                     type: 'error',
+    //                     text1: 'Account creation failed',
+    //                     text2: errorMessage,
+    //                     visibilityTime: 3000,
+    //                     position: 'top',
+    //                     topOffset: 75
+    //                 });
+    //                 this.setState({isButtonLoading2: false});
+        
+    //             })
+    //         }else{
+    //             Toast.show({
+    //                 type: 'error',
+    //                 text1: 'Account creation failed',
+    //                 text2: 'Both passwords must match',
+    //                 visibilityTime: 3000,
+    //                 position: 'top',
+    //                 topOffset: 75
+    //             });
+    //             this.setState({isButtonLoading2: false});
+    //         }
+    //     }else{
+    //         Toast.show({
+    //             type: 'error',
+    //             text1: 'Account creation failed',
+    //             text2: 'Email address is not valid.',
+    //             visibilityTime: 3000,
+    //             position: 'top',
+    //             topOffset: 75
+    //         });
+    //         this.setState({isButtonLoading2: false});
+    //     }
+    // }
+
+    // changeTextInput(text:string, property:string){
+    //     switch(property){
+    //         case 'user':
+    //             this.setState({user: text}, ()=>{
+    //                 if(this.state.user == '' || this.state.password == ''){
+    //                     this.setState({loginButtonDisabled: true})
+    //                 }else{
+    //                     this.setState({loginButtonDisabled: false})
+    //                 }
+    //             });
+    //             break;
+    //         case 'password':
+    //             this.setState({password: text}, ()=>{
+    //                 if(this.state.user == '' || this.state.password == ''){
+    //                     this.setState({loginButtonDisabled: true})
+    //                 }else{
+    //                     this.setState({loginButtonDisabled: false})
+    //                 }
+    //             });
+    //             break;
+    //     }
+
+    // }
+
+    // forgotPasswordButtonClicked(){
+
+    // }
+
     render(){
         if(this.state.fontsLoaded && this.state.fontsLoaded === true){
             return(
